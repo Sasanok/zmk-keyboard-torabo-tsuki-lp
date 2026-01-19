@@ -6,7 +6,7 @@
 
 /* 最新バージョンになったので、この記述が通るようになります */
 / {
-    /* 1. オートマウスレイヤー */
+    /* 1. オートマウスレイヤー */ 
     input_listeners {
         compatible = "zmk,input-listener";
         device = <&trackball>;
