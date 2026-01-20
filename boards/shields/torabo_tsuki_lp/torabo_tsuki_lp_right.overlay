@@ -17,3 +17,8 @@
 &size_l_transform {
     col-offset = <7>;
 };
+
+/* /trackball_processor に入っている label プロパティを消す */
+&{/trackball_processor} {
+    /delete-property/ label;
+};
