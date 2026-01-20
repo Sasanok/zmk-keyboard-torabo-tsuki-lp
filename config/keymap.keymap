@@ -11,7 +11,7 @@
 
 /* * ジェスチャーパターンの設定 */
 &zip_mouse_gesture {
-    stroke-size = <300>;
+    stroke-size = <50>;
     enable-eager-mode;
     
     // ブラウザの戻る
