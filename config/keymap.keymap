@@ -27,11 +27,12 @@
         };
     };
 
-    #endif =
-        /* * オートマウスレイヤー用のプロセッサー設定
+    #endif
+
+    /* * オートマウスレイヤー用のプロセッサー設定
      * トラックボール操作時に自動的にLayer 1を有効化
      * 1000ms(1秒)操作がない場合は自動的に無効化
-     */;
+     */
 
     trackball_processor: trackball_processor {
         compatible = "zmk,input-processor-temp-layer";
