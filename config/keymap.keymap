@@ -15,19 +15,17 @@
     input_listeners {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        xy-behavior = <&sl 1>;
+        input-processors = <&trackball_processor 1 1000>;
     };
 #endif
 
-    /* * スクロール変換の設定
-     * これも本来は右側だけでいいですが、ソフトウェア設定なので
-     * そのままでもエラーにはなりにくいです。念の為そのまま置きます。
+    /* * オートマウスレイヤー用のプロセッサー設定
+     * トラックボール操作時に自動的にLayer 1を有効化
+     * 1000ms(1秒)操作がない場合は自動的に無効化
      */
     trackball_processor: trackball_processor {
         compatible = "zmk,input-processor-temp-layer";
-        label = "TRACKBALL_PROCESSOR";
         #input-processor-cells = <2>;
-        time-to-live-ms = <1000>;
     };
 
     combos {
