@@ -10,9 +10,9 @@
     
     scroll_layer: scroll_layer {
         layers = <5>;
-        // スクロール速度を1/20に調整、方向を反転
+        // スクロール速度を1/100に調整、方向を反転
         input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)
-                            &zip_scroll_scaler 1 20
+                            &zip_scroll_scaler 1 100
                             &zip_xy_to_scroll_mapper>;
     };
 };
