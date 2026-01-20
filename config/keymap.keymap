@@ -1,3 +1,6 @@
+// スクロール速度の基本値を最小に設定(デフォルトは10)
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 1
+
 #include <dt-bindings/zmk/input_transform.h> // これがスクロール機能に必須です
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
