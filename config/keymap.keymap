@@ -7,8 +7,40 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
+#include <mouse-gesture.dtsi>
+
 
 / {
+    /* * ジェスチャーパターンの設定 */
+    &zip_mouse_gesture {
+        stroke-size = <300>;
+        enable-eager-mode;
+        
+        // ブラウザの戻る
+        history_back {
+            pattern = <GESTURE_LEFT>;
+            bindings = <&kp LA(LEFT)>;
+        };
+        
+        // ブラウザの進む
+        history_forward {
+            pattern = <GESTURE_RIGHT>;
+            bindings = <&kp LA(RIGHT)>;
+        };
+        
+        // タブを閉じる
+        close_tab {
+            pattern = <GESTURE_DOWN GESTURE_RIGHT>;
+            bindings = <&kp LC(W)>;
+        };
+        
+        // 新しいタブ
+        new_tab {
+            pattern = <GESTURE_DOWN GESTURE_LEFT>;
+            bindings = <&kp LC(T)>;
+        };
+    };
+
     /* * オートマウスレイヤー用のプロセッサー設定
      * トラックボール操作時に自動的にLayer 1を有効化
      * 1000ms(1秒)操作がない場合は自動的に無効化
