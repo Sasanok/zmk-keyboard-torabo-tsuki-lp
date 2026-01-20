@@ -6,25 +6,11 @@
 #include <dt-bindings/zmk/pointing.h>
 
 / {
-    /* * ▼▼▼ 重要な修正 ▼▼▼
-     * #if defined(...) を使うことで、
-     * 「右側(Right)のビルドの時だけ」この設定を有効にします。
-     * これで左側のビルドエラーが消えます。
-     */
-
-    #if defined(CONFIG_SHIELD_TORABO_TSUKI_LP_RIGHT)
-
-    input_listeners {
-        compatible = "zmk,input-listener";
-        device = <&trackball>;
-        input-processors = <&trackball_processor 1 1000>;
-    };
-
-    #endif
-
     /* * オートマウスレイヤー用のプロセッサー設定
      * トラックボール操作時に自動的にLayer 1を有効化
      * 1000ms(1秒)操作がない場合は自動的に無効化
+     * 
+     * 注: input_listenersの設定はtorabo_tsuki_lp_right.overlayに移動しました
      */
 
     trackball_processor: trackball_processor {
