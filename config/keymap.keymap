@@ -14,28 +14,28 @@
     stroke-size = <50>;
     enable-eager-mode;
     
-    // ブラウザの戻る
-    history_back {
+    // デスクトップ左へ移動
+    desktop_left {
         pattern = <GESTURE_LEFT>;
-        bindings = <&kp LA(LEFT)>;
+        bindings = <&kp LC(LEFT)>;
     };
     
-    // ブラウザの進む
-    history_forward {
+    // デスクトップ右へ移動
+    desktop_right {
         pattern = <GESTURE_RIGHT>;
-        bindings = <&kp LA(RIGHT)>;
+        bindings = <&kp LC(RIGHT)>;
     };
     
-    // タブを閉じる
-    close_tab {
-        pattern = <GESTURE_DOWN GESTURE_RIGHT>;
-        bindings = <&kp LC(W)>;
+    // Mission Control
+    mission_control {
+        pattern = <GESTURE_UP>;
+        bindings = <&kp LC(UP)>;
     };
     
-    // 新しいタブ
-    new_tab {
-        pattern = <GESTURE_DOWN GESTURE_LEFT>;
-        bindings = <&kp LC(T)>;
+    // Spotlight検索
+    spotlight {
+        pattern = <GESTURE_DOWN>;
+        bindings = <&kp LG(SPACE)>;
     };
 };
 
