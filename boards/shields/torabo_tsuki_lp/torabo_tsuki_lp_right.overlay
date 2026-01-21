@@ -14,11 +14,7 @@
         layers = <5>;
         // スクロール速度を1/256に調整(2段階: 1/16 × 1/16)、方向を反転
         input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)
-                            &zip_scroll_scaler 1 16
-                            &zip_scroll_scaler 1 16
-                            &zip_scroll_scaler 1 16
-                            &zip_scroll_scaler 1 16
-                            &zip_scroll_scaler 1 16
+                            &zip_xy_scaler 1 20
                             &zip_xy_to_scroll_mapper>;
     };
 };
