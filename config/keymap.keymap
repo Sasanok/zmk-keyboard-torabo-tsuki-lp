@@ -13,6 +13,7 @@
 &zip_mouse_gesture {
     stroke-size = <50>;
     enable-eager-mode;
+    // Updated gestures for Mac compatibility
     
     // デスクトップ左へ移動
     desktop_left {
