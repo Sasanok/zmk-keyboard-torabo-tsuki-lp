@@ -9,33 +9,33 @@
 #include <dt-bindings/zmk/pointing.h>
 #include <mouse-gesture.dtsi>
 
-/* * ジェスチャーパターンの設定 */
+/* * ジェスチャーパターンの設定 (Mac用 - モディファイア修正版) */
 &zip_mouse_gesture {
     stroke-size = <50>;
     enable-eager-mode;
     
-    // 左ジェスチャー -> デスクトップ左へ移動
+    // 左ジェスチャー -> デスクトップ左へ移動 (Mac: Control+Left)
     gesture_left {
         pattern = <GESTURE_LEFT>;
-        bindings = <&kp LC(LEFT)>;
+        bindings = <&kp LG(LEFT)>;  // MacではLGがControlとして認識される
     };
     
-    // 右ジェスチャー -> デスクトップ右へ移動
+    // 右ジェスチャー -> デスクトップ右へ移動 (Mac: Control+Right)
     gesture_right {
         pattern = <GESTURE_RIGHT>;
-        bindings = <&kp LC(RIGHT)>;
+        bindings = <&kp LG(RIGHT)>;
     };
     
-    // 上ジェスチャー -> Mission Control
+    // 上ジェスチャー -> Mission Control (Mac: Control+Up)
     gesture_up {
         pattern = <GESTURE_UP>;
-        bindings = <&kp LC(UP)>;
+        bindings = <&kp LG(UP)>;
     };
     
-    // 下ジェスチャー -> Spotlight検索
+    // 下ジェスチャー -> Spotlight検索 (Mac: Command+Space)
     gesture_down {
         pattern = <GESTURE_DOWN>;
-        bindings = <&kp LG(SPACE)>;
+        bindings = <&kp LC(SPACE)>;  // MacではLCがCommandとして認識される
     };
 };
 
