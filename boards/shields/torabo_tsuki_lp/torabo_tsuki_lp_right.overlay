@@ -1,7 +1,6 @@
 #include "torabo_tsuki_lp.dtsi"
 #include <input/processors.dtsi>
 #include <dt-bindings/zmk/input_transform.h>
-#include <mouse-gesture.dtsi>
 
 &trackball_listener {
     // マウスカーソル速度を2/3に調整(遅くする)
