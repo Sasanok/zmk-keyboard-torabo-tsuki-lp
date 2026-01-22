@@ -13,30 +13,29 @@
 &zip_mouse_gesture {
     stroke-size = <50>;
     enable-eager-mode;
-    // Diagnostic: Using F13-F16 to verify configuration
     
-    // 左ジェスチャー -> F13
+    // 左ジェスチャー -> デスクトップ左へ移動
     gesture_left {
         pattern = <GESTURE_LEFT>;
-        bindings = <&kp F13>;
+        bindings = <&kp LC(LEFT)>;
     };
     
-    // 右ジェスチャー -> F14
+    // 右ジェスチャー -> デスクトップ右へ移動
     gesture_right {
         pattern = <GESTURE_RIGHT>;
-        bindings = <&kp F14>;
+        bindings = <&kp LC(RIGHT)>;
     };
     
-    // 上ジェスチャー -> F15
+    // 上ジェスチャー -> Mission Control
     gesture_up {
         pattern = <GESTURE_UP>;
-        bindings = <&kp F15>;
+        bindings = <&kp LC(UP)>;
     };
     
-    // 下ジェスチャー -> F16
+    // 下ジェスチャー -> Spotlight検索
     gesture_down {
         pattern = <GESTURE_DOWN>;
-        bindings = <&kp F16>;
+        bindings = <&kp LG(SPACE)>;
     };
 };
 
