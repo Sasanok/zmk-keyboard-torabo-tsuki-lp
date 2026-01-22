@@ -13,30 +13,30 @@
 &zip_mouse_gesture {
     stroke-size = <50>;
     enable-eager-mode;
-    // Updated gestures for Mac compatibility
+    // Diagnostic: Using F13-F16 to verify configuration
     
-    // デスクトップ左へ移動
-    desktop_left {
+    // 左ジェスチャー -> F13
+    gesture_left {
         pattern = <GESTURE_LEFT>;
-        bindings = <&kp LC(LEFT)>;
+        bindings = <&kp F13>;
     };
     
-    // デスクトップ右へ移動
-    desktop_right {
+    // 右ジェスチャー -> F14
+    gesture_right {
         pattern = <GESTURE_RIGHT>;
-        bindings = <&kp LC(RIGHT)>;
+        bindings = <&kp F14>;
     };
     
-    // Mission Control
-    mission_control {
+    // 上ジェスチャー -> F15
+    gesture_up {
         pattern = <GESTURE_UP>;
-        bindings = <&kp LC(UP)>;
+        bindings = <&kp F15>;
     };
     
-    // Spotlight検索
-    spotlight {
+    // 下ジェスチャー -> F16
+    gesture_down {
         pattern = <GESTURE_DOWN>;
-        bindings = <&kp LG(SPACE)>;
+        bindings = <&kp F16>;
     };
 };
 
