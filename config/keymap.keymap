@@ -52,6 +52,17 @@
         #input-processor-cells = <2>;
     };
 
+    behaviors {
+        // カスタムhold-tap: ホールドでジェスチャー、タップで0キー
+        gesture_n0: gesture_n0 {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            bindings = <&mouse_gesture>, <&kp>;
+        };
+    };
+
     combos {
         compatible = "zmk,combos";
 
@@ -67,9 +78,9 @@
 
         layer_0 {
             bindings = <
-&kp ESC    &kp N1     &kp N2    &kp N3    &kp N4    &kp N5                                                         &kp N6       &kp N7    &kp N8     &kp N9    &kp N0                    &kp MINUS
+&kp ESC    &kp N1     &kp N2    &kp N3    &kp N4    &kp N5                                                         &kp N6       &kp N7    &kp N8     &kp N9    &gesture_n0 0 N0          &kp MINUS
 &kp TAB    &kp Q      &kp W     &kp E     &kp R     &kp T                                                          &kp Y        &kp U     &lt 5 I    &kp O     &kp P                     &kp AT_SIGN
-&kp CAPS   &kp A      &kp S     &kp D     &kp F     &kp G        &mo 5                      &mouse_gesture         &kp H        &kp J     &kp K      &kp L     &kp SEMI                  &kp SQT
+&kp CAPS   &kp A      &kp S     &kp D     &kp F     &kp G        &mo 5                      &trans                 &kp H        &kp J     &kp K      &kp L     &kp SEMI                  &kp SQT
 &kp LSHFT  &kp Z      &kp X     &kp C     &kp V     &kp B        &mo 1                      &kp RET                &kp N        &kp M     &kp COMMA  &kp DOT   &mt RIGHT_SHIFT FSLH  &kp RSHFT
 &kp LCTRL  &kp LCTRL  &kp LGUI  &kp LALT  &kp BSPC  &lt 2 SPACE  &mt LEFT_SHIFT LANGUAGE_1  &mt RSHIFT LANGUAGE_2  &lt 3 ENTER  &kp BSPC  &kp RALT   &kp RGUI  &kp RCTRL             &kp RCTRL
             >;
