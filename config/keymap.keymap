@@ -50,6 +50,7 @@
     trackball_processor: trackball_processor {
         compatible = "zmk,input-processor-temp-layer";
         #input-processor-cells = <2>;
+        require-prior-idle-ms = <150>;  // キー入力後150ms間はトラックボールでレイヤー切り替えしない
     };
 
     behaviors {
