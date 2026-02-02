@@ -89,9 +89,9 @@
             bindings = <
 &kp ESC    &kp N1     &kp N2    &kp N3    &kp N4    &kp N5                                                    &kp N6       &kp N7    &kp N8     &kp N9    &gesture_n0 0 N0      &kp MINUS
 &kp TAB    &kp Q      &kp W     &kp E     &kp R     &kp T                                                     &kp Y        &kp U     &lt 5 I    &kp O     &kp P                 &kp AT_SIGN
-&kp CAPS   &kp A      &kp S     &kp D     &kp F     &kp G        &mo 5                      &trans            &kp H        &kp J     &kp K      &kp L     &kp SEMI              &kp SQT
-&kp LSHFT  &kp Z      &kp X     &kp C     &kp V     &kp B        &mo 1                      &kp RET           &kp N        &kp M     &kp COMMA  &kp DOT   &mt RIGHT_SHIFT FSLH  &kp RSHFT
-&kp LCTRL  &kp LCTRL  &kp LGUI  &kp LALT  &kp BSPC  &lt 2 SPACE  &mt LEFT_SHIFT LANGUAGE_1  &lt 1 LANGUAGE_2  &lt 3 ENTER  &kp BSPC  &kp RALT   &kp RGUI  &kp RCTRL             &kp RCTRL
+&kp CAPS   &kp A      &kp S     &kp D     &kp F     &kp G        &kp PLUS                   &kp UP_ARROW      &kp H        &kp J     &kp K      &kp L     &kp SEMI              &kp SQT
+&kp LSHFT  &kp Z      &kp X     &kp C     &kp V     &kp B        &kp KP_MINUS               &kp DOWN_ARROW    &kp N        &kp M     &kp COMMA  &kp DOT   &mt RIGHT_SHIFT FSLH  &kp UNDER
+&kp LCTRL  &kp LCTRL  &kp LGUI  &kp LALT  &kp BSPC  &lt 2 SPACE  &mt LEFT_SHIFT LANGUAGE_1  &lt 1 LANGUAGE_2  &lt 3 ENTER  &kp BSPC  &kp RALT   &kp RGUI  &kp RCTRL             &kp RIGHT_SHIFT
             >;
         };
 
@@ -109,7 +109,7 @@
 
         layer_2 {
             bindings = <
-&trans  &trans      &trans      &trans      &trans      &trans                      &trans      &trans      &trans      &trans      &trans      &trans
+&kp F1  &kp F2      &kp F3      &kp F4      &kp F5      &kp F6                      &kp F7      &kp F8      &kp F9      &kp F10     &kp F11     &kp F12
 &trans  &kp LS(N1)  &kp LS(N2)  &kp LS(N3)  &kp LS(N4)  &kp LS(N5)                  &kp LS(N6)  &kp LS(N7)  &kp LS(N8)  &kp LS(N9)  &kp LS(N0)  &trans
 &trans  &kp N1      &kp N2      &kp N3      &kp N4      &kp N5      &trans  &trans  &kp LBRC    &kp MINUS   &kp EQUAL   &kp RBRC    &kp COLON   &trans
 &trans  &kp N6      &kp N7      &kp N8      &kp N9      &kp N0      &trans  &trans  &kp UNDER   &kp PLUS    &kp LBKT    &kp RBKT    &kp BSLH    &trans
@@ -142,6 +142,36 @@
         /* Layer 5: スクロールレイヤー */
 
         layer_5 {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        layer_6 {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        layer_7 {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        layer_8 {
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
