@@ -1,39 +1,45 @@
 // スクロール速度の基本値を最小に設定(デフォルトは10)
+
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 1
 
 #include <dt-bindings/zmk/input_transform.h> // これがスクロール機能に必須です
+#include <dt-bindings/zmk/reset.h>
+#include <mouse-gesture.dtsi>
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
-#include <dt-bindings/zmk/reset.h>
-#include <mouse-gesture.dtsi>
 
 /* * ジェスチャーパターンの設定 (Mac用 - モディファイア修正版) */
+
 &zip_mouse_gesture {
     stroke-size = <50>;
     enable-eager-mode;
-    
+
     // 左ジェスチャー -> デスクトップ左へ移動 (Mac: Control+Left)
+
     gesture_left {
         pattern = <GESTURE_LEFT>;
         bindings = <&kp LG(LEFT)>;  // MacではLGがControlとして認識される
     };
-    
+
     // 右ジェスチャー -> デスクトップ右へ移動 (Mac: Control+Right)
+
     gesture_right {
         pattern = <GESTURE_RIGHT>;
         bindings = <&kp LG(RIGHT)>;
     };
-    
+
     // 上ジェスチャー -> Mission Control (Mac: Control+Up)
+
     gesture_up {
         pattern = <GESTURE_UP>;
         bindings = <&kp LG(UP)>;
     };
-    
+
     // 下ジェスチャー -> Spotlight検索 (Mac: Command+Space)
+
     gesture_down {
         pattern = <GESTURE_DOWN>;
         bindings = <&kp LC(SPACE)>;  // MacではLCがCommandとして認識される
@@ -56,6 +62,7 @@
 
     behaviors {
         // カスタムhold-tap: ホールドでジェスチャー、タップで0キー
+
         gesture_n0: gesture_n0 {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -80,11 +87,11 @@
 
         layer_0 {
             bindings = <
-&kp ESC    &kp N1     &kp N2    &kp N3    &kp N4    &kp N5                                                         &kp N6       &kp N7    &kp N8     &kp N9    &gesture_n0 0 N0          &kp MINUS
-&kp TAB    &kp Q      &kp W     &kp E     &kp R     &kp T                                                          &kp Y        &kp U     &lt 5 I    &kp O     &kp P                     &kp AT_SIGN
-&kp CAPS   &kp A      &kp S     &kp D     &kp F     &kp G        &mo 5                      &trans                 &kp H        &kp J     &kp K      &kp L     &kp SEMI                  &kp SQT
-&kp LSHFT  &kp Z      &kp X     &kp C     &kp V     &kp B        &mo 1                      &kp RET                &kp N        &kp M     &kp COMMA  &kp DOT   &mt RIGHT_SHIFT FSLH  &kp RSHFT
-&kp LCTRL  &kp LCTRL  &kp LGUI  &kp LALT  &kp BSPC  &lt 2 SPACE  &mt LEFT_SHIFT LANGUAGE_1  &mt RSHIFT LANGUAGE_2  &lt 3 ENTER  &kp BSPC  &kp RALT   &kp RGUI  &kp RCTRL             &kp RCTRL
+&kp ESC    &kp N1     &kp N2    &kp N3    &kp N4    &kp N5                                                    &kp N6       &kp N7    &kp N8     &kp N9    &gesture_n0 0 N0      &kp MINUS
+&kp TAB    &kp Q      &kp W     &kp E     &kp R     &kp T                                                     &kp Y        &kp U     &lt 5 I    &kp O     &kp P                 &kp AT_SIGN
+&kp CAPS   &kp A      &kp S     &kp D     &kp F     &kp G        &mo 5                      &trans            &kp H        &kp J     &kp K      &kp L     &kp SEMI              &kp SQT
+&kp LSHFT  &kp Z      &kp X     &kp C     &kp V     &kp B        &mo 1                      &kp RET           &kp N        &kp M     &kp COMMA  &kp DOT   &mt RIGHT_SHIFT FSLH  &kp RSHFT
+&kp LCTRL  &kp LCTRL  &kp LGUI  &kp LALT  &kp BSPC  &lt 2 SPACE  &mt LEFT_SHIFT LANGUAGE_1  &lt 1 LANGUAGE_2  &lt 3 ENTER  &kp BSPC  &kp RALT   &kp RGUI  &kp RCTRL             &kp RCTRL
             >;
         };
 
@@ -111,13 +118,14 @@
         };
 
         /* Layer 3: 機能キー + システムリセット (左手側再起動用) */
+
         layer_3 {
             bindings = <
-&sys_reset  &trans   &trans   &trans        &trans        &trans                      &trans    &trans     &trans     &trans     &trans    &bootloader
-&trans      &kp F1   &kp F2   &kp F3        &kp F4        &kp F5                      &kp HOME  &kp PG_UP  &kp PG_DN  &kp END    &kp ESC   &trans
-&trans      &kp F6   &kp F7   &kp F8        &kp F9        &kp F10     &trans  &trans  &kp LEFT  &kp DOWN   &kp UP     &kp RIGHT  &kp TAB   &trans
-&trans      &kp F11  &kp F12  &out OUT_USB  &out OUT_BLE  &bt BT_NXT  &trans  &trans  &kp SQT   &kp DQT    &kp GRAVE  &kp TILDE  &kp PIPE  &trans
-&trans      &trans   &trans   &trans        &kp DEL       &kp TAB     &trans  &trans  &trans    &trans     &trans     &trans     &trans    &trans
+&sys_reset  &trans   &trans   &trans        &trans        &trans                      &trans    &trans     &trans     &trans     &kp UP_ARROW    &bootloader
+&trans      &kp F1   &kp F2   &kp F3        &kp F4        &kp F5                      &kp HOME  &kp PG_UP  &kp PG_DN  &kp LEFT   &kp DOWN_ARROW  &kp RIGHT_ARROW
+&trans      &kp F6   &kp F7   &kp F8        &kp F9        &kp F10     &trans  &trans  &kp LEFT  &kp DOWN   &kp UP     &kp RIGHT  &kp TAB         &trans
+&trans      &kp F11  &kp F12  &out OUT_USB  &out OUT_BLE  &bt BT_NXT  &trans  &trans  &kp SQT   &kp DQT    &kp GRAVE  &kp TILDE  &kp PIPE        &trans
+&trans      &trans   &trans   &trans        &kp DEL       &kp TAB     &trans  &trans  &trans    &trans     &trans     &trans     &trans          &trans
             >;
         };
 
