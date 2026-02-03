@@ -3,7 +3,9 @@
 
 #include <zephyr/sys/util_macro.h>
 
-#if IS_ENABLED(CONFIG_ZMK_SPLIT_ROLE_CENTRAL)
+// カスタム電源管理を無効化 (左手側接続問題のデバッグ用)
+// 有効化する場合は #if 1 に変更
+#if 0 // IS_ENABLED(CONFIG_ZMK_SPLIT_ROLE_CENTRAL)
 
 #include <zephyr/bluetooth/bluetooth.h>
 #include <zephyr/bluetooth/conn.h>
