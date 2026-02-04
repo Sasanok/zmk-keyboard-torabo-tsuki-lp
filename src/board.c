@@ -274,3 +274,62 @@ INPUT_CALLBACK_DEFINE(DEVICE_DT_GET_OR_NULL(DT_NODELABEL(trackball)),
 SYS_INIT(split_power_mgmt_init, APPLICATION, CONFIG_APPLICATION_INIT_PRIORITY);
 
 #endif /* CONFIG_ZMK_SPLIT_ROLE_CENTRAL */
+
+#if !IS_ENABLED(CONFIG_ZMK_SPLIT_ROLE_CENTRAL)
+// ペリフェラル側 (左手) の接続維持コード
+// 長時間切断時に自動リセットをかけてアドバタイジングを強制再開する
+
+#include <zephyr/bluetooth/bluetooth.h>
+#include <zephyr/bluetooth/conn.h>
+#include <zephyr/kernel.h>
+#include <zephyr/logging/log.h>
+#include <zephyr/sys/reboot.h>
+
+LOG_MODULE_REGISTER(peripheral_keepalive, CONFIG_ZMK_LOG_LEVEL);
+
+// 15分未接続ならリセットしてアドバタイジング再開
+// これにより「数時間後に復帰しない」問題を回避
+#define KEEPALIVE_TIMEOUT K_MINUTES(15)
+
+static struct k_work_delayable keepalive_work;
+
+static void keepalive_handler(struct k_work *work) {
+  LOG_WRN("Keepalive timeout reached - rebooting to restart advertising");
+  // 強制再起動
+  sys_reboot(SYS_REBOOT_WARM);
+}
+
+static void connected(struct bt_conn *conn, uint8_t err) {
+  if (err) {
+    return;
+  }
+  LOG_INF("Connected - cancelling keepalive reboot");
+  // 接続されたらリセット計画をキャンセル
+  k_work_cancel_delayable(&keepalive_work);
+}
+
+static void disconnected(struct bt_conn *conn, uint8_t reason) {
+  LOG_INF("Disconnected - scheduling keepalive reboot");
+  // 切断されたらリセットをスケジュール
+  k_work_schedule(&keepalive_work, KEEPALIVE_TIMEOUT);
+}
+
+BT_CONN_CB_DEFINE(conn_callbacks) = {
+    .connected = connected,
+    .disconnected = disconnected,
+};
+
+static int peripheral_keepalive_init(void) {
+  LOG_INF("Initializing peripheral keepalive");
+  k_work_init_delayable(&keepalive_work, keepalive_handler);
+
+  // 起動直後は未接続扱いなのでスケジュール開始
+  // (ZMKが接続確立すれば connected コールバックでキャンセルされる)
+  k_work_schedule(&keepalive_work, KEEPALIVE_TIMEOUT);
+  return 0;
+}
+
+SYS_INIT(peripheral_keepalive_init, APPLICATION,
+         CONFIG_APPLICATION_INIT_PRIORITY);
+
+#endif /* !CONFIG_ZMK_SPLIT_ROLE_CENTRAL */
