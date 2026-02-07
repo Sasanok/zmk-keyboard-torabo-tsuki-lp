@@ -44,6 +44,18 @@
         pattern = <GESTURE_DOWN>;
         bindings = <&kp LC(SPACE)>;  // MacではLCがCommandとして認識される
     };
+
+    // 右→左ジェスチャー -> ブラウザで戻る (Mac: Command+[)
+    browser_back {
+        pattern = <GESTURE_RIGHT GESTURE_LEFT>;
+        bindings = <&kp LC(LBKT)>;
+    };
+
+    // 左→右ジェスチャー -> ブラウザで進む (Mac: Command+])
+    browser_forward {
+        pattern = <GESTURE_LEFT GESTURE_RIGHT>;
+        bindings = <&kp LC(RBKT)>;
+    };
 };
 
 / {
