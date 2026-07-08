@@ -85,6 +85,7 @@
 
     behaviors {
         // カスタムレイヤータップ: スクロール用 (balanced flavor)
+
         lt_balanced: lt_balanced {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -111,7 +112,7 @@
             #binding-cells = <0>;
             wait-ms = <30>;
             tap-ms = <30>;
-            bindings = <&bt BT_SEL 0>, <&to 1>;
+            bindings = <&bt BT_SEL 0 &to 1>;
         };
 
         win_mode: win_mode {
@@ -119,7 +120,7 @@
             #binding-cells = <0>;
             wait-ms = <30>;
             tap-ms = <30>;
-            bindings = <&bt BT_SEL 1>, <&to 2>;
+            bindings = <&bt BT_SEL 1 &to 2>;
         };
 
         win_bt3_mode: win_bt3_mode {
@@ -127,7 +128,7 @@
             #binding-cells = <0>;
             wait-ms = <30>;
             tap-ms = <30>;
-            bindings = <&bt BT_SEL 2>, <&to 2>;
+            bindings = <&bt BT_SEL 2 &to 2>;
         };
     };
 
@@ -148,11 +149,11 @@
 
         layer_0 {
             bindings = <
-&mac_mode  &win_mode  &win_bt3_mode  &none  &none  &none                  &none  &none  &none  &none      &mouse_gesture  &none
-&none  &none  &none  &none  &none  &none                  &none  &none  &mo 5  &mkp LCLK  &mkp RCLK       &mkp MCLK
-&none  &none  &none  &none  &none  &none  &none  &none    &none  &none  &none  &none      &none           &none
-&none  &none  &none  &none  &none  &none  &mo 5  &none    &none  &none  &none  &none      &none           &none
-&none  &none  &none  &none  &none  &none  &none  &none    &none  &none  &none  &none      &none           &none
+&mac_mode  &win_mode  &win_bt3_mode  &none  &none  &none                &none  &none  &none  &none         &mouse_gesture  &none
+&none      &none      &none          &none  &none  &none                &none  &none  &mo 5  &mkp LCLK     &mkp RCLK       &mkp MCLK
+&none      &none      &none          &none  &none  &none  &none  &none  &none  &none  &none  &none         &none           &none
+&none      &none      &none          &none  &none  &none  &mo 5  &none  &none  &none  &none  &none         &none           &none
+&none      &none      &none          &none  &none  &none  &none  &none  &none  &none  &none  &bt BT_SEL 1  &bt BT_SEL 2    &bt BT_SEL 3
             >;
         };
 
@@ -238,11 +239,11 @@
 
         layer_8 {
             bindings = <
-&kp ESC    &kp N1            &kp N2        &kp N3    &kp N4    &kp N5                                                    &kp N6       &kp N7    &kp N8     &kp N9          &gesture_n0 0 N0      &kp JA_MINUS
-&kp TAB    &kp Q             &kp W         &kp E     &kp R     &kp T                                                     &kp Y        &kp U     &lt_balanced 5 I    &kp O           &kp P                 &kp JA_AT
-&kp CAPS   &kp A             &kp S         &kp D     &kp F     &kp G        &kp JA_LBKT          &kp UP_ARROW             &kp H        &kp J     &kp K      &kp L           &kp JA_SEMI           &kp JA_SQT
-&kp LSHFT  &kp Z             &kp X         &kp C     &kp V     &kp B        &kp JA_RBKT          &kp DOWN_ARROW           &kp N        &kp M     &kp COMMA  &kp DOT         &mt RIGHT_SHIFT FSLH  &kp JA_UNDER
-&kp LCTRL  &kp LEFT_COMMAND  &kp LEFT_ALT  &kp LALT  &kp BSPC  &lt 2 SPACE  &mt LEFT_SHIFT CAPS  &lt 1 LG(LEFT_BRACKET)  &lt 3 ENTER  &kp BSPC  &kp RALT   &kp LEFT_ARROW  &kp RIGHT_ARROW       &kp RIGHT_SHIFT
+&kp ESC    &kp N1            &kp N2        &kp N3    &kp N4    &kp N5                                                    &kp N6       &kp N7    &kp N8            &kp N9          &gesture_n0 0 N0      &kp JA_MINUS
+&kp TAB    &kp Q             &kp W         &kp E     &kp R     &kp T                                                     &kp Y        &kp U     &lt_balanced 5 I  &kp O           &kp P                 &kp JA_AT
+&kp CAPS   &kp A             &kp S         &kp D     &kp F     &kp G        &kp JA_LBKT          &kp UP_ARROW            &kp H        &kp J     &kp K             &kp L           &kp JA_SEMI           &kp JA_SQT
+&kp LSHFT  &kp Z             &kp X         &kp C     &kp V     &kp B        &kp JA_RBKT          &kp DOWN_ARROW          &kp N        &kp M     &kp COMMA         &kp DOT         &mt RIGHT_SHIFT FSLH  &kp JA_UNDER
+&kp LCTRL  &kp LEFT_COMMAND  &kp LEFT_ALT  &kp LALT  &kp BSPC  &lt 2 SPACE  &mt LEFT_SHIFT CAPS  &lt 1 LG(LEFT_BRACKET)  &lt 3 ENTER  &kp BSPC  &kp RALT          &kp LEFT_ARROW  &kp RIGHT_ARROW       &kp RIGHT_SHIFT
             >;
         };
     };
