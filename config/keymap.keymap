@@ -112,7 +112,7 @@
             #binding-cells = <0>;
             wait-ms = <30>;
             tap-ms = <30>;
-            bindings = <&bt BT_SEL 0 &to 1>;
+            bindings = <&out OUT_BLE &bt BT_SEL 0 &to 1>;
         };
 
         win_mode: win_mode {
@@ -120,7 +120,7 @@
             #binding-cells = <0>;
             wait-ms = <30>;
             tap-ms = <30>;
-            bindings = <&bt BT_SEL 1 &to 2>;
+            bindings = <&out OUT_BLE &bt BT_SEL 1 &to 2>;
         };
 
         win_bt3_mode: win_bt3_mode {
@@ -128,7 +128,31 @@
             #binding-cells = <0>;
             wait-ms = <30>;
             tap-ms = <30>;
-            bindings = <&bt BT_SEL 2 &to 2>;
+            bindings = <&out OUT_BLE &bt BT_SEL 2 &to 2>;
+        };
+
+        bt1_pair: bt1_pair {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <80>;
+            tap-ms = <30>;
+            bindings = <&out OUT_BLE &bt BT_SEL 0 &bt BT_CLR &to 1>;
+        };
+
+        bt2_pair: bt2_pair {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <80>;
+            tap-ms = <30>;
+            bindings = <&out OUT_BLE &bt BT_SEL 1 &bt BT_CLR &to 2>;
+        };
+
+        bt3_pair: bt3_pair {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <80>;
+            tap-ms = <30>;
+            bindings = <&out OUT_BLE &bt BT_SEL 2 &bt BT_CLR &to 2>;
         };
     };
 
@@ -149,11 +173,11 @@
 
         layer_0 {
             bindings = <
-&mac_mode  &win_mode  &win_bt3_mode  &none  &none  &none                &none  &none  &none  &none         &mouse_gesture  &bt BT_CLR_ALL
+&mac_mode  &win_mode  &win_bt3_mode  &none  &none  &none                &bt1_pair  &bt2_pair  &bt3_pair  &none         &mouse_gesture  &bt BT_CLR_ALL
 &none      &none      &none          &none  &none  &none                &none  &none  &mo 5  &mkp LCLK     &mkp RCLK       &mkp MCLK
 &none      &none      &none          &none  &none  &none  &none  &none  &none  &none  &none  &none         &none           &none
 &none      &none      &none          &none  &none  &none  &mo 5  &none  &none  &none  &none  &none         &none           &none
-&none      &none      &none          &none  &none  &none  &none  &none  &none  &none  &none  &bt BT_SEL 1  &bt BT_SEL 2    &bt BT_SEL 3
+&none      &none      &none          &none  &none  &none  &none  &none  &none  &none  &none  &none         &none           &none
             >;
         };
 
