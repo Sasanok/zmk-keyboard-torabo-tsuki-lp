@@ -48,17 +48,39 @@
 };
 
 / {
-    /* * オートマウスレイヤー用のプロセッサー設定
-     * トラックボール操作時に自動的にLayer 1を有効化
-     * 1000ms(1秒)操作がない場合は自動的に無効化
-     * 
-     * 注: input_listenersの設定はtorabo_tsuki_lp_right.overlayに移動しました
-     */
+    win_mouse_gesture: win_mouse_gesture {
+        compatible = "zmk,input-processor-mouse-gesture";
+        #input-processor-cells = <0>;
+        stroke-size = <50>;
+        enable-eager-mode;
 
-    trackball_processor: trackball_processor {
-        compatible = "zmk,input-processor-temp-layer";
-        #input-processor-cells = <2>;
-        require-prior-idle-ms = <150>;  // キー入力後150ms間はトラックボールでレイヤー切り替えしない
+        // 左ジェスチャー -> 仮想デスクトップ左へ移動 (Windows: Ctrl+Win+Left)
+
+        gesture_left {
+            pattern = <GESTURE_LEFT>;
+            bindings = <&kp LC(LG(LEFT))>;
+        };
+
+        // 右ジェスチャー -> 仮想デスクトップ右へ移動 (Windows: Ctrl+Win+Right)
+
+        gesture_right {
+            pattern = <GESTURE_RIGHT>;
+            bindings = <&kp LC(LG(RIGHT))>;
+        };
+
+        // 上ジェスチャー -> タスクビュー (Windows: Win+Tab)
+
+        gesture_up {
+            pattern = <GESTURE_UP>;
+            bindings = <&kp LG(TAB)>;
+        };
+
+        // 下ジェスチャー -> Windows検索 (Windows: Win+S)
+
+        gesture_down {
+            pattern = <GESTURE_DOWN>;
+            bindings = <&kp LG(S)>;
+        };
     };
 
     behaviors {
@@ -83,6 +105,32 @@
         };
     };
 
+    macros {
+        mac_mode: mac_mode {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <30>;
+            bindings = <&bt BT_SEL 0>, <&to 1>;
+        };
+
+        win_mode: win_mode {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <30>;
+            bindings = <&bt BT_SEL 1>, <&to 2>;
+        };
+
+        win_bt3_mode: win_bt3_mode {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <30>;
+            bindings = <&bt BT_SEL 2>, <&to 2>;
+        };
+    };
+
     combos {
         compatible = "zmk,combos";
 
@@ -96,17 +144,19 @@
     keymap {
         compatible = "zmk,keymap";
 
+        /* Layer 0: マウス専用ベース */
+
         layer_0 {
             bindings = <
-&kp ESC    &kp N1            &kp N2        &kp N3    &kp N4    &kp N5                                                    &kp N6       &kp N7    &kp N8     &kp N9          &gesture_n0 0 N0      &kp JA_MINUS
-&kp TAB    &kp Q             &kp W         &kp E     &kp R     &kp T                                                     &kp Y        &kp U     &lt_balanced 5 I    &kp O           &kp P                 &kp JA_AT
-&kp CAPS   &kp A             &kp S         &kp D     &kp F     &kp G        &kp JA_LBKT          &kp UP_ARROW             &kp H        &kp J     &kp K      &kp L           &kp JA_SEMI           &kp JA_SQT
-&kp LSHFT  &kp Z             &kp X         &kp C     &kp V     &kp B        &kp JA_RBKT          &kp DOWN_ARROW           &kp N        &kp M     &kp COMMA  &kp DOT         &mt RIGHT_SHIFT FSLH  &kp JA_UNDER
-&kp LCTRL  &kp LEFT_COMMAND  &kp LEFT_ALT  &kp LALT  &kp BSPC  &lt 2 SPACE  &mt LEFT_SHIFT CAPS  &lt 1 LG(LEFT_BRACKET)  &lt 3 ENTER  &kp BSPC  &kp RALT   &kp LEFT_ARROW  &kp RIGHT_ARROW       &kp RIGHT_SHIFT
+&mac_mode  &win_mode  &win_bt3_mode  &none  &none  &none                  &none  &none  &none  &none      &mouse_gesture  &none
+&none  &none  &none  &none  &none  &none                  &none  &none  &mo 5  &mkp LCLK  &mkp RCLK       &mkp MCLK
+&none  &none  &none  &none  &none  &none  &none  &none    &none  &none  &none  &none      &none           &none
+&none  &none  &none  &none  &none  &none  &mo 5  &none    &none  &none  &none  &none      &none           &none
+&none  &none  &none  &none  &none  &none  &none  &none    &none  &none  &none  &none      &none           &none
             >;
         };
 
-        /* Layer 1: マウスレイヤー */
+        /* Layer 1: Mac用マウスレイヤー */
 
         layer_1 {
             bindings = <
@@ -118,13 +168,15 @@
             >;
         };
 
+        /* Layer 2: Windows用マウスレイヤー */
+
         layer_2 {
             bindings = <
-&kp F1  &kp F2      &kp F3      &kp F4      &kp F5      &kp F6                      &kp F7        &kp F8        &kp F9        &kp F10      &kp F11       &kp F12
-&trans  &kp LS(N1)  &kp LS(N2)  &kp LS(N3)  &kp LS(N4)  &kp LS(N5)                  &kp LS(N6)    &kp LS(N7)    &kp LS(N8)    &kp LS(N9)   &kp LS(N0)    &trans
-&trans  &kp N1      &kp N2      &kp N3      &kp N4      &kp N5      &trans  &trans  &kp JA_LBRC   &kp JA_MINUS  &kp JA_EQUAL  &kp JA_RBRC  &kp JA_COLON  &trans
-&trans  &kp N6      &kp N7      &kp N8      &kp N9      &kp N0      &trans  &trans  &kp JA_UNDER  &kp JA_PLUS   &kp JA_LBKT   &kp JA_RBKT  &kp JA_BSLH   &trans
-&trans  &trans      &trans      &trans      &trans      &trans      &trans  &trans  &kp TAB       &kp DEL       &trans        &trans       &trans        &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans     &trans     &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &mkp LCLK  &mkp RCLK  &mkp MCLK
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans     &trans     &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &mo 5   &trans  &trans  &trans  &trans  &trans     &trans     &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans     &trans     &trans
             >;
         };
 
@@ -182,13 +234,15 @@
             >;
         };
 
+        /* Layer 8: 旧Layer 0バックアップ */
+
         layer_8 {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&kp ESC    &kp N1            &kp N2        &kp N3    &kp N4    &kp N5                                                    &kp N6       &kp N7    &kp N8     &kp N9          &gesture_n0 0 N0      &kp JA_MINUS
+&kp TAB    &kp Q             &kp W         &kp E     &kp R     &kp T                                                     &kp Y        &kp U     &lt_balanced 5 I    &kp O           &kp P                 &kp JA_AT
+&kp CAPS   &kp A             &kp S         &kp D     &kp F     &kp G        &kp JA_LBKT          &kp UP_ARROW             &kp H        &kp J     &kp K      &kp L           &kp JA_SEMI           &kp JA_SQT
+&kp LSHFT  &kp Z             &kp X         &kp C     &kp V     &kp B        &kp JA_RBKT          &kp DOWN_ARROW           &kp N        &kp M     &kp COMMA  &kp DOT         &mt RIGHT_SHIFT FSLH  &kp JA_UNDER
+&kp LCTRL  &kp LEFT_COMMAND  &kp LEFT_ALT  &kp LALT  &kp BSPC  &lt 2 SPACE  &mt LEFT_SHIFT CAPS  &lt 1 LG(LEFT_BRACKET)  &lt 3 ENTER  &kp BSPC  &kp RALT   &kp LEFT_ARROW  &kp RIGHT_ARROW       &kp RIGHT_SHIFT
             >;
         };
     };
