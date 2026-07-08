@@ -159,7 +159,7 @@
 &none      &none      &none          &none  &none  &none                &none  &none  &mo 5  &mkp LCLK     &mkp RCLK       &mkp MCLK
 &none      &none      &none          &none  &none  &none  &none  &none  &none  &none  &none  &none         &none           &none
 &none      &none      &none          &none  &none  &none  &mo 5  &none  &none  &none  &none  &none         &none           &none
-&none      &none      &none          &none  &none  &none  &none  &none  &none  &none  &none  &none         &none           &none
+&none      &none      &none          &none  &none  &none  &none  &none  &none  &none  &none  &mac_mode     &win_mode       &win_bt3_mode
             >;
         };
 
