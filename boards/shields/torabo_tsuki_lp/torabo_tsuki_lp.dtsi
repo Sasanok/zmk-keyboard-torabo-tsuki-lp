@@ -158,7 +158,10 @@
         irq-gpios = <&gpio0 19 GPIO_ACTIVE_LOW>;
         power-gpios = <&gpio0 8 (GPIO_ACTIVE_HIGH | NRF_GPIO_DRIVE_H1)>;
         // センサー解像度を上げて、低速時のカクつき(整数丸め)を減らす。
-        // 高解像度を input-processor の縮小率(1/5)で戻す。実効は少し速め(約640相当)。
-        res-cpi = <3192>;
+        // 高解像度を input-processor の縮小率(1/6)で戻す。実効は約640相当。
+        res-cpi = <3990>;
+        // アイドル時にセンサーが省電力(rest)モードへ入ると復帰直後にカクつくため、
+        // 常時フル稼働にして復帰のもたつきを無くす(その分バッテリー消費は増える)。
+        force-awake;
     };
 };
