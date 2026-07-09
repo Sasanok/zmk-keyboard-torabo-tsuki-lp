@@ -10,8 +10,8 @@
     
     scroll_layer: scroll_layer {
         layers = <5>;
-        // スクロール速度を1/20に調整
-        input-processors = <&zip_xy_scaler 1 20
+        // スクロール速度を1/100に調整(センサーCPIを上げた分だけ縮小率を強めて普通のホイール感度に)
+        input-processors = <&zip_xy_scaler 1 100
                             &zip_xy_to_scroll_mapper>;
     };
 
