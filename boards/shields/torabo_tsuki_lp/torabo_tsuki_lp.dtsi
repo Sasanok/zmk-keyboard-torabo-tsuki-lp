@@ -158,7 +158,7 @@
         irq-gpios = <&gpio0 19 GPIO_ACTIVE_LOW>;
         power-gpios = <&gpio0 8 (GPIO_ACTIVE_HIGH | NRF_GPIO_DRIVE_H1)>;
         // センサー解像度を上げて、低速時のカクつき(整数丸め)を減らす。
-        // 上げた分は input-processor の縮小率(1/3)で戻すので実効速度は据え置き。
-        res-cpi = <1596>;
+        // 高解像度を input-processor の縮小率(1/5)で戻す。実効は少し速め(約640相当)。
+        res-cpi = <3192>;
     };
 };
