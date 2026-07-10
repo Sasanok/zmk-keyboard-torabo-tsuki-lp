@@ -3,30 +3,31 @@
 #include <dt-bindings/zmk/input_transform.h>
 
 &trackball_listener {
-    // マウスカーソル速度を2/3に調整(遅くする)
+    // Mac/基本レイヤーは約800 CPIをそのまま送る。
     input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)
-                        &zip_mouse_gesture
-                        &zip_xy_scaler 1 6>;
+                        &zip_mouse_gesture>;
     
     scroll_layer: scroll_layer {
         layers = <5>;
-        // スクロール速度を1/100に調整(センサーCPIを上げた分だけ縮小率を強めて普通のホイール感度に)
-        input-processors = <&zip_xy_scaler 1 100
+        // 798 CPI / 20で、従来の3990 CPI / 100と同じ実効速度にする。
+        // ZMK推奨の係数上限16に収めるため、1/4と1/5の二段に分ける。
+        input-processors = <&zip_xy_scaler 1 4
+                            &zip_xy_scaler 1 5
                             &zip_xy_to_scroll_mapper>;
     };
 
     mac_gesture_layer: mac_gesture_layer {
         layers = <1>;
         input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)
-                            &zip_mouse_gesture
-                            &zip_xy_scaler 1 6>;
+                            &zip_mouse_gesture>;
     };
 
     win_gesture_layer: win_gesture_layer {
         layers = <2>;
+        // Windowsは従来の実効速度(約665 CPI)を維持する。
         input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)
                             &win_mouse_gesture
-                            &zip_xy_scaler 1 6>;
+                            &zip_xy_scaler 5 6>;
     };
 };
 
