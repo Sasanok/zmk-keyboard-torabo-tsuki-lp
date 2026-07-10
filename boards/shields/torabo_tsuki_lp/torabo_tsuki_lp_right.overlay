@@ -3,31 +3,33 @@
 #include <dt-bindings/zmk/input_transform.h>
 
 &trackball_listener {
-    // Mac/基本レイヤーは約800 CPIをそのまま送る。
+    // 1596 CPIを1/2にして、実効約800 CPIにする。
     input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)
-                        &zip_mouse_gesture>;
+                        &zip_mouse_gesture
+                        &zip_xy_scaler 1 2>;
     
     scroll_layer: scroll_layer {
         layers = <5>;
-        // 798 CPI / 20で、従来の3990 CPI / 100と同じ実効速度にする。
-        // ZMK推奨の係数上限16に収めるため、1/4と1/5の二段に分ける。
-        input-processors = <&zip_xy_scaler 1 4
-                            &zip_xy_scaler 1 5
+        // 1596 CPI / 40で、798 CPI / 20と同じ実効速度にする。
+        // ZMK推奨の係数上限16に収めるため、1/5と1/8の二段に分ける。
+        input-processors = <&zip_xy_scaler 1 5
+                            &zip_xy_scaler 1 8
                             &zip_xy_to_scroll_mapper>;
     };
 
     mac_gesture_layer: mac_gesture_layer {
         layers = <1>;
         input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)
-                            &zip_mouse_gesture>;
+                            &zip_mouse_gesture
+                            &zip_xy_scaler 1 2>;
     };
 
     win_gesture_layer: win_gesture_layer {
         layers = <2>;
-        // Windowsは従来の実効速度(約665 CPI)を維持する。
+        // Windowsも実効約800 CPIとし、前回より追従を約20%上げる。
         input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)
                             &win_mouse_gesture
-                            &zip_xy_scaler 5 6>;
+                            &zip_xy_scaler 1 2>;
     };
 };
 
